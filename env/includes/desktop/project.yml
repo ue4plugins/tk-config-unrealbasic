@@ -52,7 +52,6 @@ desktop.project:
     - '*After*'
     - '*Effects*'
     - 'CC*'
-    - '*Softimage*'
     - '*Unreal*'
     name: Creative Tools
   - matches:
