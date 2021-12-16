@@ -53,6 +53,7 @@ desktop.project:
     - '*Effects*'
     - 'CC*'
     - '*Softimage*'
+    - '*Unreal*'
     name: Creative Tools
   - matches:
     - '*Hiero*'

@@ -16,13 +16,13 @@ includes:
 - ../common/engines.yml
 - ../common/apps.yml
 - apps.yml
+- ../unreal/settings/tk-multi-publish2.yml
 
 maya.asset_step:
   apps:
     tk-multi-about: '@common.apps.tk-multi-about'
 
-    tk-multi-publish2: '@maya.apps.tk-multi-publish2'
-
+    tk-multi-publish2: "@settings.tk-multi-publish2.maya.asset_step.unreal"
     tk-multi-loader2: '@maya.apps.tk-multi-loader2'
 
     tk-multi-shotgunpanel: '@maya.apps.tk-multi-shotgunpanel'
