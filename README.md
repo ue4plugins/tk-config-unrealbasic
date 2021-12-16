@@ -20,7 +20,7 @@ https://docs.unrealengine.com/en-US/Engine/Content/UsingUnrealEnginewithAutodesk
 ## Updating this config with changes from the ShotGrid basic config
 
 It is possible to update this config with latest changes done on the ShotGrid basic config, for example
-to udpate Shotgun Toolkit standard apps to their latest approved version.
+to update Shotgun Toolkit standard apps to their latest approved version.
 
 This can be done by merging a particular ShotGrid basic config into a branch and merging this branch once checked on master
 
