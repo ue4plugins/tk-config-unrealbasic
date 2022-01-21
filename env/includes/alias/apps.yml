@@ -1,0 +1,131 @@
+# Copyright (c) 2017 Shotgun Software Inc.
+#
+# CONFIDENTIAL AND PROPRIETARY
+#
+# This work is provided "AS IS" and subject to the Shotgun Pipeline Toolkit
+# Source Code License included in this distribution package. See LICENSE.
+# By accessing, using, copying or modifying this work you indicate your
+# agreement to the Shotgun Pipeline Toolkit Source Code License. All rights
+# not expressly granted therein are reserved by Shotgun Software Inc.
+#
+
+# this include configuration defines the common apps of the Alias Integration when it
+# is running in either its project or asset level configuration
+
+includes:
+- ../common/apps.yml
+- ../common/settings/tk-multi-publish2.yml
+
+alias.apps.tk-multi-publish2:
+  help_url: "@common.apps.tk-multi-publish2.help_url"
+  collector: "{self}/collector.py:{engine}/tk-multi-publish2/basic/collector.py"
+  publish_plugins:
+  - '@common.settings.tk-multi-publish2.publish_file'
+  - '@common.settings.tk-multi-publish2.upload_version'
+  - name: Begin file versioning
+    hook: "{engine}/tk-multi-publish2/basic/start_version_control.py"
+    settings: {}
+  - name: Publish to ShotGrid
+    hook: "{self}/publish_file.py:{engine}/tk-multi-publish2/basic/publish_session.py"
+    settings: {}
+  - name: Create 3D Version for Review
+    hook: "{self}/upload_version.py:{engine}/tk-multi-publish2/basic/upload_version.py"
+    settings:
+      3D Version: True
+  - name: Publish Variants to ShotGrid
+    hook: "{self}/publish_file.py:{engine}/tk-multi-publish2/basic/publish_variants.py"
+    settings: {}
+  - name: Publish Annotations to ShotGrid
+    hook: "{engine}/tk-multi-publish2/basic/publish_annotations.py"
+    settings: {}
+  location: "@common.apps.tk-multi-publish2.location"
+
+alias.apps.tk-multi-loader2:
+  action_mappings:
+    Alias File: [import, import_as_reference]
+    Wref File: [reference]
+    Igs File: [import, import_as_reference]
+    Stp File: [import, import_as_reference]
+    Stl File: [import, import_as_reference]
+    Jt File: [import, import_as_reference]
+    Catpart File: [import, import_as_reference]
+    Fbx File: [import]
+    Image: [texture_node]
+    Photoshop Image: [texture_node]
+    Tif File: [texture_node]
+    Bmp File: [texture_node]
+    Obj File: [import_subdiv]
+    Tsm File: [import_subdiv]
+    F3d File: [import_subdiv]
+    Sf3d File: [import_subdiv]
+  actions_hook: "{engine}/tk-multi-loader2/basic/scene_actions.py"
+  entities:
+  - caption: Current Project
+    type: Hierarchy
+    root: "{context.project}"
+    publish_filters: []
+  - caption: Linked Projects
+    entity_type: Asset
+    filters:
+      - [linked_projects, is, "{context.project}"]
+    hierarchy: [project.Project.name, type, sg_asset_type, code]
+  - caption: My Tasks
+    type: Query
+    entity_type: Task
+    filters:
+    - [project, is, '{context.project}']
+    - [task_assignees, is, '{context.user}']
+    hierarchy: [entity, content]
+  # ignore publishes without a status. with zero config, it is very easy
+  # to publish the same path multiple times. the default zero config publish
+  # plugins will clear the status of previous publishes of the same path.
+  # this filter means only the latest publish will be displayed.
+  publish_filters: [["sg_status_list", "is_not", null]]
+  location: "@common.apps.tk-multi-loader2.location"
+
+alias.apps.tk-multi-shotgunpanel:
+  actions_hook: "{engine}/tk-multi-shotgunpanel/basic/scene_actions.py"
+  action_mappings:
+    PublishedFile:
+    - actions: [import, import_as_reference]
+      filters: {published_file_type: Alias File}
+    - actions: [reference]
+      filters: {published_file_type: Wref File}
+    - actions: [import, import_as_reference]
+      filters: {published_file_type: Igs File}
+    - actions: [import, import_as_reference]
+      filters: {published_file_type: Stp File}
+    - actions: [import, import_as_reference]
+      filters: {published_file_type: Stl File}
+    - actions: [import, import_as_reference]
+      filters: {published_file_type: Jt File}
+    - actions: [import, import_as_reference]
+      filters: {published_file_type: Catpart File}
+    - actions: [import]
+      filters: {published_file_type: Fbx File}
+    - actions: [texture_node]
+      filters: {published_file_type: Image}
+    - actions: [texture_node]
+      filters: {published_file_type: Photoshop Image}
+    - actions: [texture_node]
+      filters: {published_file_type: Tif File}
+    - actions: [texture_node]
+      filters: {published_file_type: Bmp File}
+    - actions: [import_subdiv]
+      filters: {published_file_type: Obj File}
+    - actions: [import_subdiv]
+      filters: {published_file_type: Tsm File}
+    - actions: [import_subdiv]
+      filters: {published_file_type: F3d File}
+    - actions: [import_subdiv]
+      filters: {published_file_type: Sf3d File}
+    - actions: [publish_clipboard]
+      filters: {}
+    Task:
+    - actions: [assign_task, task_to_ip]
+      filters: {}
+    Version:
+    - actions: [quicktime_clipboard, sequence_clipboard, add_to_playlist]
+      filters: {}
+  enable_context_switch: true
+  location: "@common.apps.tk-multi-shotgunpanel.location"
