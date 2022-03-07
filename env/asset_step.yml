@@ -42,4 +42,6 @@ engines:
   tk-alias: '@alias.asset_step'
   tk-vred: '@vred.asset_step'
   tk-shotgun: '@shotgun.all'
-  tk-unreal: "@settings.tk-unreal.asset_step"
+  # Disabled for now since there is nothing specific
+  # for Asset step in tk-unreal at the moment.
+  # tk-unreal: "@settings.tk-unreal.asset_step"
