@@ -14,16 +14,6 @@ includes:
 
 ################################################################################
 
-# asset_step
-settings.tk-unreal.asset_step:
-  apps:
-    tk-multi-about: '@common.apps.tk-multi-about'
-    tk-multi-pythonconsole: '@common.apps.tk-multi-pythonconsole'
-  location: "@tk-unreal.location"
-  menu_favourites: []
-  run_at_startup: []
-  launch_builtin_plugins: [basic]
-  automatic_context_switch: false
 
 # project
 settings.tk-unreal.project:
@@ -39,3 +29,4 @@ settings.tk-unreal.project:
   - {app_instance: tk-multi-shotgunpanel, name: ''}
   launch_builtin_plugins: [basic]
   automatic_context_switch: false
+ 

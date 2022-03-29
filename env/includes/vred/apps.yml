@@ -28,10 +28,10 @@ vred.apps.tk-multi-publish2:
   - name: Publish to ShotGrid
     hook: "{self}/publish_file.py:{engine}/tk-multi-publish2/basic/publish_session.py"
     settings: {}
-  - name: Create 2D Version for Review
+  - name: Create Version for Review
     hook: "{self}/upload_version.py:{engine}/tk-multi-publish2/basic/upload_session_version.py"
     settings:
-      3D Version: False
+      Version Type: 2D Version
   - name: Publish Rendering to ShotGrid
     hook: "{self}/publish_file.py:{engine}/tk-multi-publish2/basic/publish_rendering.py"
     settings: {}
@@ -42,15 +42,15 @@ vred.apps.tk-multi-publish2:
 
 vred.apps.tk-multi-loader2:
   action_mappings:
-    Alias File: [import]
-    Igs File: [import]
-    Stp File: [import]
-    Stl File: [import]
-    Jt File: [import]
-    Catpart File: [import]
-    Fbx File: [import]
-    VRED Scene: [import]
-    Osb File: [import]
+    Alias File: [import, import_with_options, smart_reference]
+    Igs File: [import, import_with_options, smart_reference]
+    Stp File: [import, import_with_options, smart_reference]
+    Stl File: [import, import_with_options, smart_reference]
+    Jt File: [import, import_with_options, smart_reference]
+    Catpart File: [import, import_with_options, smart_reference]
+    Fbx File: [import, import_with_options, smart_reference]
+    VRED Scene: [import, import_with_options, smart_reference]
+    Osb File: [import, import_with_options, smart_reference]
     Image: [ import_sceneplate ]
     Rendered Image: [ import_sceneplate ]
   actions_hook: "{engine}/tk-multi-loader2/basic/scene_actions.py"

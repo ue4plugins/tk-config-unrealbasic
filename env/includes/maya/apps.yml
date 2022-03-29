@@ -35,9 +35,11 @@ maya.apps.tk-multi-loader2:
     Alembic Cache: [reference, import]
     Image: [texture_node, image_plane]
     Maya Scene: [reference, import]
+    Maya FBX: [reference, import]
     Photoshop Image: [texture_node, image_plane]
     Rendered Image: [texture_node, image_plane]
     Texture: [texture_node, image_plane]
+    Unreal FBX: [reference, import]
   actions_hook: '{self}/tk-maya_actions.py'
   entities:
   - caption: Current Project
@@ -68,12 +70,16 @@ maya.apps.tk-multi-shotgunpanel:
       filters: {published_file_type: Image}
     - actions: [reference, import]
       filters: {published_file_type: Maya Scene}
+    - actions: [reference, import]
+      filters: {published_file_type: Maya FBX}
     - actions: [texture_node, image_plane]
       filters: {published_file_type: Photoshop Image}
     - actions: [texture_node, image_plane]
       filters: {published_file_type: Rendered Image}
     - actions: [texture_node, image_plane]
       filters: {published_file_type: Texture}
+    - actions: [reference, import]
+      filters: {published_file_type: Unreal FBX}
     - actions: [publish_clipboard]
       filters: {}
     Task:
