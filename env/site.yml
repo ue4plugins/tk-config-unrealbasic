@@ -1,0 +1,44 @@
+# Copyright (c) 2016 Shotgun Software Inc.
+#
+# CONFIDENTIAL AND PROPRIETARY
+#
+# This work is provided "AS IS" and subject to the Shotgun Pipeline Toolkit
+# Source Code License included in this distribution package. See LICENSE.
+# By accessing, using, copying or modifying this work you indicate your
+# agreement to the Shotgun Pipeline Toolkit Source Code License. All rights
+# not expressly granted therein are reserved by Shotgun Software Inc.
+#
+
+description: Configuration to load when when we are running in a site
+             specific context and no project or other ShotGrid entity
+             has yet been established as the current context.
+
+includes:
+- includes/houdini/site.yml
+- includes/maya/site.yml
+- includes/nuke/site.yml
+- includes/desktop/site.yml
+- includes/desktop2/site.yml
+- includes/shell/site.yml
+- includes/photoshopcc/site.yml
+- includes/aftereffects/site.yml
+- includes/3dsmax/site.yml
+- includes/alias/site.yml
+- includes/vred/site.yml
+- includes/shotgun/all.yml
+
+engines:
+  tk-houdini: '@houdini.site'
+  tk-maya: '@maya.site'
+  tk-nuke: '@nuke.site'
+  tk-nukestudio: '@nuke.site'
+  tk-desktop: '@desktop.site'
+  tk-desktop2: '@desktop2.site'
+  tk-shell: '@shell.site'
+  tk-photoshopcc: '@photoshopcc.site'
+  tk-aftereffects: '@aftereffects.site'
+  tk-3dsmaxplus: '@3dsmaxplus.site'
+  tk-3dsmax: '@3dsmax.site'
+  tk-alias: '@alias.site'
+  tk-vred: '@vred.site'
+  tk-shotgun: '@shotgun.all'
