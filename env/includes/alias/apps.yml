@@ -25,17 +25,17 @@ alias.apps.tk-multi-publish2:
   - name: Begin file versioning
     hook: "{engine}/tk-multi-publish2/basic/start_version_control.py"
     settings: {}
-  - name: Publish to ShotGrid
+  - name: Publish to Flow Production Tracking
     hook: "{self}/publish_file.py:{engine}/tk-multi-publish2/basic/publish_session.py"
     settings: {}
   - name: Create Version for Review
     hook: "{self}/upload_version.py:{engine}/tk-multi-publish2/basic/upload_version.py"
     settings:
       Version Type: 2D Version
-  - name: Publish Variants to ShotGrid
+  - name: Publish Variants to Flow Production Tracking
     hook: "{self}/publish_file.py:{engine}/tk-multi-publish2/basic/publish_variants.py"
     settings: {}
-  - name: Publish Annotations to ShotGrid
+  - name: Publish Annotations to Flow Production Tracking
     hook: "{engine}/tk-multi-publish2/basic/publish_annotations.py"
     settings: {}
   location: "@common.apps.tk-multi-publish2.location"
@@ -49,12 +49,14 @@ alias.apps.tk-multi-loader2:
     Stl File: [import, import_as_reference]
     Jt File: [import, import_as_reference]
     Catpart File: [import, import_as_reference]
-    Fbx File: [import]
+    Catproduct File: [import, import_as_reference]
+    Fbx File: [import, import_subdiv, import_as_reference]
+    Motion Builder FBX: [import, import_subdiv, import_as_reference]
     Image: [texture_node]
     Photoshop Image: [texture_node]
     Tif File: [texture_node]
     Bmp File: [texture_node]
-    Obj File: [import_subdiv]
+    Obj File: [import_subdiv, import_as_reference]
     Tsm File: [import_subdiv]
     F3d File: [import_subdiv]
     Sf3d File: [import_subdiv]
@@ -86,6 +88,9 @@ alias.apps.tk-multi-loader2:
 alias.apps.tk-multi-shotgunpanel:
   actions_hook: "{engine}/tk-multi-shotgunpanel/basic/scene_actions.py"
   action_mappings:
+    Note:
+    - actions: [ note_to_ip, note_to_closed, import_note_attachments ]
+      filters: { }
     PublishedFile:
     - actions: [import, import_as_reference]
       filters: {published_file_type: Alias File}
@@ -101,8 +106,12 @@ alias.apps.tk-multi-shotgunpanel:
       filters: {published_file_type: Jt File}
     - actions: [import, import_as_reference]
       filters: {published_file_type: Catpart File}
-    - actions: [import]
+    - actions: [import, import_as_reference]
+      filters: {published_file_type: Catproduct File}
+    - actions: [import, import_subdiv, import_as_reference]
       filters: {published_file_type: Fbx File}
+    - actions: [import, import_subdiv, import_as_reference]
+      filters: {published_file_type: Motion Builder FBX}
     - actions: [texture_node]
       filters: {published_file_type: Image}
     - actions: [texture_node]
@@ -111,7 +120,7 @@ alias.apps.tk-multi-shotgunpanel:
       filters: {published_file_type: Tif File}
     - actions: [texture_node]
       filters: {published_file_type: Bmp File}
-    - actions: [import_subdiv]
+    - actions: [import_subdiv, import_as_reference]
       filters: {published_file_type: Obj File}
     - actions: [import_subdiv]
       filters: {published_file_type: Tsm File}
@@ -129,3 +138,45 @@ alias.apps.tk-multi-shotgunpanel:
       filters: {}
   enable_context_switch: true
   location: "@common.apps.tk-multi-shotgunpanel.location"
+
+alias.apps.tk-multi-data-validation:
+  hook_data_validation: "{engine}/tk-multi-data-validation/basic/data_validation.py"
+  rules:
+    - id: layer_is_empty
+      data_type: Layers
+    - id: layer_symmetry
+      data_type: Layers
+    - id: shader_unused
+      data_type: Shaders
+    - id: shader_is_vred_compatible
+      data_type: Shaders
+    - id: node_instances
+      data_type: Model
+    - id: node_pivots_at_origin
+      data_type: Model
+    - id: node_has_zero_transform
+      data_type: Model
+    - id: node_templates
+      data_type: Model
+    - id: node_is_null
+      data_type: Model
+    - id: node_has_construction_history
+      data_type: Model
+    - id: set_empty
+      data_type: Model
+    - id: curves
+      data_type: Model
+    - id: cos_unused
+      data_type: Model
+    - id: cos_construction_history
+      data_type: Model
+    - id: references_exist
+      data_type: Model
+    - id: locators
+      data_type: Model
+    # Below here is the example we provide for you in the config
+    # To enable them in your config, please uncomment the lines.
+    # You MUST have the hook un-commented as well to see the example work
+#    - id: my_custom_rule
+#      data_type: Miscellaneous
+  location: "@common.apps.tk-multi-data-validation.location"
