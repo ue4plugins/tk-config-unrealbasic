@@ -138,7 +138,7 @@ class Bootstrap(get_hook_baseclass()):
             for asset in response_d["assets"]:
                 name = asset["name"]
                 m = re.match(
-                    r"%s-py\d.\d-%s.zip" % (version, pname),
+                    r"%s-py\d.\d+-%s.zip" % (version, pname),
                     name
                 )
                 if m:
@@ -152,9 +152,13 @@ class Bootstrap(get_hook_baseclass()):
 
             if not extracted:
                 raise RuntimeError(
-                    "Couldn't retrieve a suitable asset from %s" % [
-                        a["name"] for a in response_d["assets"]
-                    ]
+                    "Couldn't retrieve a suitable asset for %s %s from %s" % (
+                        version,
+                        pname,
+                        [
+                            a["name"] for a in response_d["assets"]
+                        ]
+                    )
                 )
             self.logger.info(
                 "Extracted files: %s from %s" % (
