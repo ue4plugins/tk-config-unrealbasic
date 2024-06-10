@@ -29,10 +29,10 @@ nuke.apps.tk-multi-publish2:
     - name: Begin file versioning
       hook: "{engine}/tk-multi-publish2/basic/nukestudio_start_version_control.py"
       settings: {}
-    - name: Publish to ShotGrid
+    - name: Publish to Flow Production Tracking
       hook: "{self}/publish_file.py:{engine}/tk-multi-publish2/basic/nuke_publish_script.py"
       settings: {}
-    - name: Publish to ShotGrid
+    - name: Publish to Flow Production Tracking
       hook: "{self}/publish_file.py:{engine}/tk-multi-publish2/basic/nukestudio_publish_project.py"
       settings: {}
     - name: Update Flame Clip
@@ -106,6 +106,9 @@ nukestudio.apps.tk-multi-loader2:
 
 nuke.apps.tk-multi-shotgunpanel:
   action_mappings:
+    Note:
+    - actions: [ note_to_ip, note_to_closed ]
+      filters: { }
     PublishedFile:
     - actions: [read_node]
       filters: {published_file_type: Alembic Cache}
