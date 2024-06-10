@@ -35,11 +35,11 @@ common.apps.tk-multi-setframerange:
 common.apps.tk-multi-publish2.location:
   type: app_store
   name: tk-multi-publish2
-  version: v2.8.3
+  version: v2.8.4
 common.apps.tk-multi-loader2.location:
   type: app_store
   name: tk-multi-loader2
-  version: v1.25.0
+  version: v1.25.1
 common.apps.tk-multi-shotgunpanel.location:
   type: app_store
   name: tk-multi-shotgunpanel
@@ -57,7 +57,7 @@ common.apps.tk-multi-setframerange.location:
   type: app_store
   name: tk-multi-setframerange
 common.apps.tk-multi-data-validation.location:
-  version: v0.2.0
+  version: v0.3.0
   type: app_store
   name: tk-multi-data-validation
 common.apps.tk-nuke-quickreview.location:

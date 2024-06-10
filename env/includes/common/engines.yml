@@ -11,27 +11,22 @@
 
 # locations for common engines
 
-# 3dsMax using the tk-3dsmaxplus engine
-common.engines.tk-3dsmaxplus.location:
-  type: app_store
-  name: tk-3dsmaxplus
-  version: v0.6.2
 common.engines.tk-3dsmax.location:
   type: app_store
   name: tk-3dsmax
-  version: v1.3.0
+  version: v1.4.0
 common.engines.tk-houdini.location:
   type: app_store
   name: tk-houdini
-  version: v1.9.0
+  version: v1.9.1
 common.engines.tk-maya.location:
   type: app_store
   name: tk-maya
-  version: v0.12.1
+  version: v0.13.0
 common.engines.tk-nuke.location:
   type: app_store
   name: tk-nuke
-  version: v0.15.0
+  version: v0.15.1
 common.engines.tk-photoshopcc.location:
   type: app_store
   name: tk-photoshopcc
@@ -47,15 +42,15 @@ common.engines.tk-flame.location:
 common.engines.tk-alias.location:
   type: app_store
   name: tk-alias
-  version: v3.2.0
+  version: v3.3.0
 common.engines.tk-vred.location:
   type: app_store
   name: tk-vred
-  version: v3.2.1
+  version: v3.3.0
 common.engines.tk-desktop.location:
   type: app_store
   name: tk-desktop
-  version: v2.7.1
+  version: v2.7.2
 common.engines.tk-desktop2.location:
   type: app_store
   name: tk-desktop2
