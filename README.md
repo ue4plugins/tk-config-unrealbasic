@@ -13,7 +13,7 @@ Unreal engine as well as several Unreal related options in Maya.
 For more information on how to use the Unreal engine, please see the support
 documentation:
 
-https://docs.unrealengine.com/en-US/Engine/Content/UsingUnrealEnginewithAutodeskShotgun/index.html
+https://docs.unrealengine.com/5.0/en-US/using-unreal-engine-with-autodesk-shotgrid/
 
 -------------------------------------------------------------------------
 
