@@ -25,14 +25,14 @@ vred.apps.tk-multi-publish2:
   - name: Begin file versioning
     hook: "{engine}/tk-multi-publish2/basic/start_version_control.py"
     settings: {}
-  - name: Publish to ShotGrid
+  - name: Publish to Flow Production Tracking
     hook: "{self}/publish_file.py:{engine}/tk-multi-publish2/basic/publish_session.py"
     settings: {}
   - name: Create Version for Review
     hook: "{self}/upload_version.py:{engine}/tk-multi-publish2/basic/upload_session_version.py"
     settings:
       Version Type: 2D Version
-  - name: Publish Rendering to ShotGrid
+  - name: Publish Rendering to Flow Production Tracking
     hook: "{self}/publish_file.py:{engine}/tk-multi-publish2/basic/publish_rendering.py"
     settings: {}
   - name: Upload for review
@@ -49,6 +49,7 @@ vred.apps.tk-multi-loader2:
     Jt File: [import, import_with_options, smart_reference]
     Catpart File: [import, import_with_options, smart_reference]
     Fbx File: [import, import_with_options, smart_reference]
+    Motion Builder FBX: [import, import_with_options, smart_reference]
     VRED Scene: [import, import_with_options, smart_reference]
     Osb File: [import, import_with_options, smart_reference]
     Image: [ import_sceneplate ]
@@ -83,24 +84,29 @@ vred.apps.tk-multi-shotgunpanel:
   shotgun_fields_hook: "{self}/shotgun_fields.py:{engine}/tk-multi-shotgunpanel/basic/shotgun_fields.py"
   shotgun_filters_hook: "{engine}/tk-multi-shotgunpanel/basic/shotgun_filters.py"
   action_mappings:
+    Note:
+    - actions: [ note_to_ip, note_to_closed ]
+      filters: { }
     PublishedFile:
-    - actions: [import]
+    - actions: [import, import_with_options, smart_reference]
       filters: {published_file_type: Alias File}
-    - actions: [import]
+    - actions: [import, import_with_options, smart_reference]
       filters: {published_file_type: Igs File}
-    - actions: [import]
+    - actions: [import, import_with_options, smart_reference]
       filters: {published_file_type: Stp File}
-    - actions: [import]
+    - actions: [import, import_with_options, smart_reference]
       filters: {published_file_type: Stl File}
-    - actions: [import]
+    - actions: [import, import_with_options, smart_reference]
       filters: {published_file_type: Jt File}
-    - actions: [import]
+    - actions: [import, import_with_options, smart_reference]
       filters: {published_file_type: Catpart File}
-    - actions: [import]
+    - actions: [import, import_with_options, smart_reference]
       filters: {published_file_type: Fbx File}
-    - actions: [import]
+    - actions: [import, import_with_options, smart_reference]
+      filters: {published_file_type: Motion Builder FBX}
+    - actions: [import, import_with_options, smart_reference]
       filters: {published_file_type: VRED Scene}
-    - actions: [import]
+    - actions: [import, import_with_options, smart_reference]
       filters: {published_file_type: Osb File}
     - actions: [import_sceneplate]
       filters: {published_file_type: Image}
@@ -116,3 +122,23 @@ vred.apps.tk-multi-shotgunpanel:
       filters: {}
   enable_context_switch: true
   location: "@common.apps.tk-multi-shotgunpanel.location"
+
+vred.apps.tk-multi-data-validation:
+  hook_data_validation: "{engine}/tk-multi-data-validation/basic/data_validation.py"
+  hook_ui_config: "{engine}/tk-multi-data-validation/basic/ui_config.py"
+  rules:
+    - id: scene_graph_hidden_nodes
+      data_type: Scene Graph
+    - id: scene_graph_ref_unload
+      data_type: Scene Graph
+    - id: material_unused
+      data_type: Materials
+    - id: material_clearcoat_orangepeel
+      data_type: Materials
+    - id: material_bump_normal_map
+      data_type: Materials
+    - id: animation_block_uncheck
+      data_type: Animation
+    - id: animation_clip_empty
+      data_type: Animation
+  location: "@common.apps.tk-multi-data-validation.location"

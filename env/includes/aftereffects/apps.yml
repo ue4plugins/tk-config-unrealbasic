@@ -26,10 +26,10 @@ aftereffects.apps.tk-multi-publish2:
     - name: Begin file versioning
       hook: "{engine}/tk-multi-publish2/basic/start_version_control.py"
       settings: {}
-    - name: Publish Renderings to ShotGrid
+    - name: Publish Renderings to Flow Production Tracking
       hook: "{self}/publish_file.py:{engine}/tk-multi-publish2/basic/publish_rendering.py"
       settings: {}
-    - name: Publish to ShotGrid
+    - name: Publish to Flow Production Tracking
       hook: "{self}/publish_file.py:{engine}/tk-multi-publish2/basic/publish_document.py"
       settings: {}
     - name: Upload for review
@@ -71,6 +71,9 @@ aftereffects.apps.tk-multi-shotgunpanel:
   shotgun_fields_hook: "{self}/shotgun_fields.py"
   actions_hook: "{engine}/tk-multi-shotgunpanel/basic/scene_actions.py"
   action_mappings:
+    Note:
+    - actions: [ note_to_ip, note_to_closed ]
+      filters: { }
     PublishedFile:
     - actions: [add_to_project, add_to_comp]
       filters: {published_file_type: After Effects Project}

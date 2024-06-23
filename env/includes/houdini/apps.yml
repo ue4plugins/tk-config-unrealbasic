@@ -26,7 +26,7 @@ houdini.apps.tk-multi-publish2:
     - name: Begin file versioning
       hook: "{engine}/tk-multi-publish2/basic/start_version_control.py"
       settings: {}
-    - name: Publish to ShotGrid
+    - name: Publish to Flow Production Tracking
       hook: "{self}/publish_file.py:{engine}/tk-multi-publish2/basic/publish_session.py"
       settings: {}
   location: "@common.apps.tk-multi-publish2.location"
@@ -62,6 +62,9 @@ houdini.apps.tk-multi-loader2:
 houdini.apps.tk-multi-shotgunpanel:
     actions_hook: '{self}/general_actions.py:{self}/tk-houdini_actions.py'
     action_mappings:
+      Note:
+      - actions: [ note_to_ip, note_to_closed ]
+        filters: { }
       PublishedFile:
       - actions: [import]
         filters: {published_file_type: Alembic Cache}

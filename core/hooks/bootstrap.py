@@ -97,7 +97,7 @@ class Bootstrap(get_hook_baseclass()):
             if self.shotgun.config.proxy_handler:
                 # Re-use proxy settings from the Shotgun connection
                 opener = url2.build_opener(
-                    self.parent.shotgun.config.proxy_handler,
+                    self.shotgun.config.proxy_handler,
                 )
                 url2.install_opener(opener)
 
@@ -138,7 +138,7 @@ class Bootstrap(get_hook_baseclass()):
             for asset in response_d["assets"]:
                 name = asset["name"]
                 m = re.match(
-                    r"%s-py\d.\d-%s.zip" % (version, pname),
+                    r"%s-py\d.\d+-%s.zip" % (version, pname),
                     name
                 )
                 if m:
@@ -229,7 +229,7 @@ class Bootstrap(get_hook_baseclass()):
         if self.shotgun.config.proxy_handler:
             # Re-use proxy settings from the Shotgun connection
             opener = url2.build_opener(
-                self.parent.shotgun.config.proxy_handler,
+                self.shotgun.config.proxy_handler,
                 auth_handler
             )
         else:
